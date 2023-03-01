@@ -60,21 +60,49 @@ function revealCell(cell) {
   cellElement.classList.add("revealed");
   if (cell.mine) {
     cellElement.classList.add("mine");
-    alert("Game Over");
-    restartGame();
+    handleGameOver();
     return;
   }
 
   if (cell.neighborMines === 0) {
     revealNeighbors(cell.x, cell.y);
   } else {
-    cellElement.innerHTML = cell.neighborMines; // display the number of neighboring mines
+    displayNumber(cellElement, cell.neighborMines); // display the number of neighboring mines
   }
 
   if (revealedCells === BOARD_SIZE * BOARD_SIZE - NUMBER_OF_MINES) {
-    alert("You Won!");
+    handleGameWon();
     return;
   }
+}
+
+function handleGameOver() {
+  const mineCells = document.querySelectorAll(".cell.mine");
+  mineCells.forEach((cell) => cell.classList.add("revealed"));
+  activeModal("Game Over");
+}
+
+function displayNumber(cellElement, number) {
+  cellElement.innerHTML = number;
+}
+
+function handleGameWon() {
+  activeModal("You Won");
+}
+
+function activeModal(text) {
+  const modal = document.querySelector(".modal");
+  const modalText = document.querySelector(".modal-text");
+  const modalSubmit = document.querySelector("#submit-button");
+  modal.classList.add("modal_active");
+  modalText.textContent = text;
+  modalSubmit.addEventListener("click", (e) => disableModal());
+}
+
+function disableModal() {
+  const modal = document.querySelector(".modal");
+  modal.classList.remove("modal_active");
+  restartGame();
 }
 
 function revealNeighbors(x, y) {
@@ -93,7 +121,13 @@ function flagCell(cell) {
   }
   cell.flagged = !cell.flagged;
   const cellElement = document.getElementById(`cell-${cell.x}-${cell.y}`);
-  cellElement.innerHTML = cell.flagged ? "M" : "";
+  if (cell.flagged) {
+    cellElement.textContent = "M";
+    cellElement.classList.add("flag");
+  } else {
+    cellElement.textContent = "";
+    cellElement.classList.remove("flag");
+  }
 }
 
 function initializeGame() {
@@ -132,6 +166,7 @@ function restartGame() {
   });
 }
 
-document.getElementById("restart-button").addEventListener("click", restartGame);
+const restartButton = document.getElementById("restart-button");
+restartButton.addEventListener("click", restartGame);
 
 initializeGame();

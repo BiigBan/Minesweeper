@@ -1,48 +1,96 @@
 body {
   font-family: Arial;
   background-color: #333;
+  overflow-x: hidden;
 }
 .board {
   display: flex;
   flex-wrap: wrap;
-  width: 192px;
+  width: 375px;
   margin: auto;
-  border:5px solid white;
+  border: 5px solid white;
   border-radius: 5px;
   margin-bottom: 2%;
 }
 
 .cell {
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
   border: 1px solid #ccc;
   text-align: center;
   line-height: 20px;
   font-size: 12px;
   cursor: pointer;
   user-select: none;
+  color: #ccc;
+}
+.flag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #4f4f4f;
 }
 .cell.revealed {
   background-color: #eee;
   border-color: #999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #222;
 }
 .cell.mine {
   background-color: red;
 }
-h1{
-  color:white;
+h1 {
+  color: white;
 }
 
-#restart-button{
-  color:white;
+#restart-button {
+  color: white;
   width: 10%;
   height: 5%;
   background-color: #333;
-  border:3px solid white;
+  border: 3px solid white;
   border-radius: 5px;
   padding: 1%;
 }
-#restart-button:hover{
+#restart-button:hover {
   background-color: #222;
-
+}
+.modal {
+  visibility: hidden;
+  opacity: 0;
+  background: rgba(0, 0, 0, 0.256);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+}
+.modal_active {
+  visibility: visible;
+  opacity: 1;
+}
+.modal-content {
+  border-radius: 5px;
+  background: #eee;
+  padding: 50px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#submit-button {
+  margin-top: 10px;
+  cursor: pointer;
+  color: white;
+  background-color: #333333;
+  border: 3px solid white;
+  border-radius: 5px;
+  padding: 20px;
+}
+#submit-button:hover {
+  background-color: #222;
 }
