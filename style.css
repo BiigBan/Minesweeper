@@ -1,12 +1,17 @@
 body {
   font-family: Arial;
+  background-color: #333;
 }
 .board {
   display: flex;
   flex-wrap: wrap;
-  width: 200px;
+  width: 192px;
   margin: auto;
+  border:5px solid white;
+  border-radius: 5px;
+  margin-bottom: 2%;
 }
+
 .cell {
   width: 20px;
   height: 20px;
@@ -23,4 +28,21 @@ body {
 }
 .cell.mine {
   background-color: red;
+}
+h1{
+  color:white;
+}
+
+#restart-button{
+  color:white;
+  width: 10%;
+  height: 5%;
+  background-color: #333;
+  border:3px solid white;
+  border-radius: 5px;
+  padding: 1%;
+}
+#restart-button:hover{
+  background-color: #222;
+
 }
